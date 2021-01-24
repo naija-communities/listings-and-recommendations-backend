@@ -28,7 +28,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'postal_code',
         'year_of_entry',
         'nigerian_identity',
-        'gender'
+        'gender',
+        'is_admin'
     ];
 
     /**
