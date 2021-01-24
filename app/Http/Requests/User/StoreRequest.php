@@ -39,7 +39,7 @@ class StoreRequest extends FormRequest
             'province' => ['required', new CanadianProvinceRule()],
             'city' => 'required',
             'topics' => [new TopicRule()],
-            'postal_code' => ['required', 'min:6', 'max:6', new PostalCodeRule()],
+            'postal_code' => ['required', new PostalCodeRule()],
             'year_of_entry' => 'required|date_format:Y-m-d'
         ];
     }
