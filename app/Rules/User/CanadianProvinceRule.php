@@ -13,6 +13,8 @@ class CanadianProvinceRule extends AllowedRule
      */
     public function __construct()
     {
+        $this->attribute = "province";
+
         $this->allowed = [
             'Alberta AB',
             'British Columbia BC',

@@ -11,6 +11,7 @@ class RelationshipStatusRule extends AllowedRule
      */
     public function __construct()
     {
+        $this->attribute = "status";
         $this->allowed =  ['single', 'very single', 'taken'];
     }
 }

@@ -8,9 +8,12 @@ class ProfessionRule extends AllowedRule
 {
     public function __construct()
     {
+        $this->attribute = "selected profession";
+
         $this->allowed = [
             'accountant',
             'architect',
+            'artist',
             'banker',
             'civil engineer',
             'forex trader',
@@ -18,6 +21,7 @@ class ProfessionRule extends AllowedRule
             'farmer',
             'health care professional',
             'medical doctor',
+            'music teacher',
             'nurse',
             'social worker',
             'network engineer',
@@ -37,6 +41,7 @@ class ProfessionRule extends AllowedRule
             'religious leader',
             'writer',
             'other',
+            'yputuber',
             'rather not say'
         ];
     }

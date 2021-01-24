@@ -11,6 +11,7 @@ class PronounRule extends AllowedRule
      */
     public function __construct()
     {
+        $this->attribute = "selected pronoun";
         $this->allowed =   ['she/her', 'he/him'. 'they/them', 'rather not say'];
     }
 }
