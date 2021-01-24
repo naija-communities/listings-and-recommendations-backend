@@ -7,6 +7,7 @@ use App\Rules\User\PostalCodeRule;
 use App\Rules\User\ProfessionRule;
 use App\Rules\User\PronounRule;
 use App\Rules\User\RelationshipStatusRule;
+use App\Rules\User\TopicRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreRequest extends FormRequest
@@ -37,8 +38,9 @@ class StoreRequest extends FormRequest
             'profession' => ['required', new ProfessionRule()],
             'province' => ['required', new CanadianProvinceRule()],
             'city' => 'required',
+            'topics' => [new TopicRule()],
             'postal_code' => ['required', 'min:6', 'max:6', new PostalCodeRule()],
-            'year_of_entry' => 'required|date_format(Y-m-d)'
+            'year_of_entry' => 'required|date_format:Y-m-d'
         ];
     }
 }

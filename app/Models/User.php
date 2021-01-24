@@ -29,6 +29,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'year_of_entry',
         'nigerian_identity',
         'gender',
+        'topics',
         'is_admin'
     ];
 

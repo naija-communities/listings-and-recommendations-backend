@@ -8,7 +8,6 @@ abstract class AllowedRule implements Rule
 {
     protected $allowed;
     protected $attribute;
-    protected $value;
 
     /**
      * Determine if the validation rule passes.
@@ -29,6 +28,6 @@ abstract class AllowedRule implements Rule
      */
     public function message()
     {
-        return "The {$this->attribute} must be one of the following. {$this->allowed}";
+        return "The {$this->attribute} is invalid.";
     }
 }
