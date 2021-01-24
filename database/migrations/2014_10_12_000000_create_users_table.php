@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->enum('profession', [
                 'accountant',
                 'architect',
+                'artist',
                 'banker',
                 'civil engineer',
                 'forex trader',
@@ -31,6 +32,7 @@ class CreateUsersTable extends Migration
                 'farmer',
                 'health care professional',
                 'medical doctor',
+                'music teacher',
                 'nurse',
                 'social worker',
                 'network engineer',
@@ -50,6 +52,7 @@ class CreateUsersTable extends Migration
                 'religious leader',
                 'writer',
                 'other',
+                'yputuber',
                 'rather not say'
             ]);
             $table->enum('province', [
