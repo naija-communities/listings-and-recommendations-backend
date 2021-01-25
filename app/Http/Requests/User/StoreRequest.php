@@ -38,9 +38,9 @@ class StoreRequest extends FormRequest
             'profession' => ['required', new ProfessionRule()],
             'province' => ['required', new CanadianProvinceRule()],
             'city' => 'required',
-            'topics' => ['json'],
             'postal_code' => ['required', new PostalCodeRule()],
             'year_of_entry' => 'required|date_format:Y-m-d',
+            'topics' => ['json'],
         ];
     }
 }

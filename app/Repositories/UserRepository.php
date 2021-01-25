@@ -62,11 +62,13 @@ class UserRepository
      */
     public function store($data)
     {
+        $toEncode = [];
+
         if ($data["password"]) {
             $data["password"] = (new BcryptHasher)->make($data['password']);
         }
 
-        if ($data["topics"]) {
+        if (isset($data["topics"])) {
             $decoded = json_decode($data["topics"], true);
             $toEncode = array_filter($decoded, function ($t) {
                 return in_array($t, $this->topics);
