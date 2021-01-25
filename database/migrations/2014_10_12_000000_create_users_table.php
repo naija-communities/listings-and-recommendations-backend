@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->enum('pronouns', ['she/her', 'he/him'. 'they/them', 'rather not say']);
+            $table->enum('pronouns', ['she/her', 'he/him', 'they/them', 'rather not say']);
             $table->enum('relationship_status', ['single', 'very single', 'taken']);
             $table->enum('profession', [
                 'accountant',

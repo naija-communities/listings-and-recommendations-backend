@@ -36,7 +36,8 @@ class AuthController extends Controller
             "province",
             "city",
             "postal_code",
-            "year_of_entry"
+            "year_of_entry",
+            "topics"
         ]);
 
         return response()->json([

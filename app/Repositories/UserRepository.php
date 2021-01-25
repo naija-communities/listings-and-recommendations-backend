@@ -7,6 +7,42 @@ use Illuminate\Hashing\BcryptHasher;
 
 class UserRepository
 {
+    protected $topics = [
+        "food and drink",
+        "sports",
+        "technology",
+        "mens fashion",
+        "womens fashion",
+        "lifestyle",
+        "family",
+        "antenatal care",
+        "pregnancy",
+        "children",
+        "business",
+        "finance",
+        "investment",
+        "tax",
+        "account",
+        "real estate",
+        "apartment rental",
+        "groceries",
+        "pharmaceuticals",
+        "diy crafts",
+        "events",
+        "car rental",
+        "rental",
+        "car deals",
+        "driving",
+        "leisure",
+        "shopping",
+        "self care",
+        "books",
+        "weddings",
+        "photography",
+        "family health",
+        "music"
+    ];
+
     /**
      * @var User
      */
@@ -29,6 +65,15 @@ class UserRepository
         if ($data["password"]) {
             $data["password"] = (new BcryptHasher)->make($data['password']);
         }
+
+        if ($data["topics"]) {
+            $decoded = json_decode($data["topics"], true);
+            $encoded = array_filter($decoded, function ($t) {
+                return in_array($t, $this->topics);
+            });
+        }
+
+        $data["topics"] = json_encode($encoded);
 
         return $this->model->create($data);
     }
