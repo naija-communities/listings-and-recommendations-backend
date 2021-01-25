@@ -68,12 +68,12 @@ class UserRepository
 
         if ($data["topics"]) {
             $decoded = json_decode($data["topics"], true);
-            $encoded = array_filter($decoded, function ($t) {
+            $toEncode = array_filter($decoded, function ($t) {
                 return in_array($t, $this->topics);
             });
         }
 
-        $data["topics"] = json_encode($encoded);
+        $data["topics"] = json_encode($toEncode);
 
         return $this->model->create($data);
     }
