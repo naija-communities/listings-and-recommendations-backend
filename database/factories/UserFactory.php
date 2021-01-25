@@ -28,6 +28,17 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
+            'pronouns' => 'she/her',
+            'relationship_status' => 'single',
+            'profession' => 'software engineer (web)',
+            'province' => 'ontario on',
+            'city' => 'toronto',
+            'postal_code' => 'M5V0H9',
+            'year_of_entry' => '2005',
+            'nigerian_identity' => 'igbo',
+            'gender' => 'man',
+            'is_admin' => null,
+            'topics' => json_encode(["music", "sports", "technology", "poetry"])
         ];
     }
 }
