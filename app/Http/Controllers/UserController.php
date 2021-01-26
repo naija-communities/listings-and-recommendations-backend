@@ -6,12 +6,10 @@ use App\Http\Requests\User\UpdateRequest;
 use App\Models\User;
 use App\Repositories\BaseRepository;
 use App\Repositories\UserRepository;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
-use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -108,6 +106,7 @@ class UserController extends Controller
 
     /**
      * @param User $user
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(User $user): \Illuminate\Http\JsonResponse
     {

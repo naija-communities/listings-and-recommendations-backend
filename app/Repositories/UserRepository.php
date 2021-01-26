@@ -85,7 +85,7 @@ class UserRepository extends BaseRepository
     {
         $toEncode = [];
 
-        if ($data["password"]) {
+        if (isset($data["password"])) {
             $data["password"] = (new BcryptHasher)->make($data['password']);
         }
 
