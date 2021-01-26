@@ -55,6 +55,8 @@ class UserRepository extends BaseRepository
     public function __construct()
     {
         $this->model = new User();
+        $this->table = "users";
+        $this->collectionName = "users";
     }
 
     /**
@@ -62,6 +64,24 @@ class UserRepository extends BaseRepository
      * @return Model
      */
     public function store($data): Model
+    {
+        return $this->save($this->prepare($data));
+    }
+
+    /**
+     * @param $data
+     * @return bool
+     */
+    public function update($data): bool
+    {
+        return parent::update($this->prepare($data));
+    }
+
+    /**
+     * @param $data
+     * @return array
+     */
+    protected function prepare($data): array
     {
         $toEncode = [];
 
@@ -80,6 +100,6 @@ class UserRepository extends BaseRepository
             $data["topics"] = json_encode($toEncode);
         }
 
-        return $this->save($data);
+        return $data;
     }
 }
