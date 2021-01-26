@@ -5,7 +5,9 @@ namespace Tests\Unit\Repositories;
 use App\Models\User;
 use App\Repositories\BaseRepository;
 use App\Repositories\UserRepository;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
@@ -68,42 +70,94 @@ class UserRepositoryTest extends TestCase
     /**
      * @test
      */
-    public function it_can_return_a_collection_of_all_users() {}
+    public function it_can_return_a_collection_of_all_users()
+    {
+        $users = User::factory(10)->create();
+        $userRepository = new UserRepository();
+
+        $this->assertInstanceOf(Collection::class, $userRepository->all());
+    }
 
     /**
      * @test
      */
-    public function it_can_find_one_user() {}
+    public function it_throws_an_exception_if_record_does_not_exist()
+    {
+        $this->expectException(ModelNotFoundException::class);
+
+        $userRepository = new UserRepository();
+        $userRepository->find(0);
+    }
 
     /**
      * @test
      */
-    public function it_can_update_an_existing_user() {}
+    public function it_returns_a_model_instance_if_record_exists()
+    {
+        $user = User::factory(1)->create()->first();
+
+        $userRepository = new UserRepository();
+        $model = $userRepository->find($user->getKey());
+
+        $this->assertInstanceOf(Model::class, $model);
+        $this->assertInstanceOf(User::class, $model);
+    }
 
     /**
      * @test
      */
-    public function it_responds_with_a_404_when_trying_to_update_a_user_that_does_not_exist() {}
+    public function it_can_update_an_existing_user()
+    {
+        $user = User::factory(1)->create()->first();
 
+        $updateData = [
+            "id" => $user->getKey(),
+            "name" => "my new name"
+        ];
 
-    /**
-     * @test
-     */
-    public function it_responds_with_a_401_when_trying_to_update_another_user() {}
+        $userRepository = new UserRepository();
+        $updated = $userRepository->update($updateData);
 
-
-    /**
-     * @test
-     */
-    public function it_responds_with_a_404_when_trying_to_delete_a_user_that_does_not_exist() {}
-
-    /**
-     * @test
-     */
-    public function it_can_delete_an_existing_user() {}
+        $this->assertTrue($updated);
+    }
 
     /**
      * @test
      */
-    public function it_responds_with_a_401_when_trying_to_delete_another_user() {}
+    public function it_responds_with_false_when_trying_to_update_a_user_that_does_not_exist()
+    {
+        $updateData = [
+            "id" => 0,
+            "name" => "my new name"
+        ];
+
+        $userRepository = new UserRepository();
+        $updated = $userRepository->update($updateData);
+
+        $this->assertFalse($updated);
+    }
+
+    /**
+     * @test
+     */
+    public function it_throws_an_exception_when_trying_to_delete_a_user_that_does_not_exist()
+    {
+        $this->expectException(ModelNotFoundException::class);
+
+        $userRepository = new UserRepository();
+        $deleted = $userRepository->destroy(new User());
+    }
+
+    /**
+     * @test
+     */
+    public function it_can_delete_an_existing_user()
+    {
+        $user = User::factory(1)->create()->first();
+
+        $userRepository = new UserRepository();
+        $deleted = $userRepository->destroy($user);
+
+        $this->assertTrue((bool) $deleted);
+    }
 }

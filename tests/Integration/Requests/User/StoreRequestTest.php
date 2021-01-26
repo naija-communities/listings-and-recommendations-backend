@@ -517,7 +517,7 @@ class StoreRequestTest extends TestCase
             'year_of_entry' => '2011-10-01'
         ]);
 
-        $this->assertSame(Response::HTTP_OK, $response->getStatusCode());
+        $this->assertSame(Response::HTTP_CREATED, $response->getStatusCode());
     }
 }
 
