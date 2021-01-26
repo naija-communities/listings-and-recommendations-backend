@@ -19,9 +19,9 @@ class UpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        if (!Auth::id()) {
-            return false;
-        }
+//        if (!Auth::id()) {
+//            return false;
+//        }
 
         return true;
     }
