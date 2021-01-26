@@ -3,9 +3,10 @@
 namespace App\Repositories;
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Hashing\BcryptHasher;
 
-class UserRepository
+class UserRepository extends BaseRepository
 {
     protected $topics = [
         "food and drink",
@@ -58,9 +59,9 @@ class UserRepository
 
     /**
      * @param $data
-     * @return bool
+     * @return Model
      */
-    public function store($data)
+    public function store($data): Model
     {
         $toEncode = [];
 
@@ -75,8 +76,10 @@ class UserRepository
             });
         }
 
-        $data["topics"] = json_encode($toEncode);
+        if (!empty($toEncode)) {
+            $data["topics"] = json_encode($toEncode);
+        }
 
-        return $this->model->create($data);
+        return $this->save($data);
     }
 }

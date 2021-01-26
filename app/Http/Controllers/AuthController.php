@@ -47,7 +47,7 @@ class AuthController extends Controller
 
         return response()->json([
             'created' => $this->repository->store($data)
-        ]);
+        ], Response::HTTP_CREATED);
     }
 
     /**
@@ -91,6 +91,6 @@ class AuthController extends Controller
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60
-        ]);
+        ], Response::HTTP_OK);
     }
 }
